@@ -9,18 +9,18 @@
 #include <unistd.h>     // Para la función fork y sleep.
 
 // Función para manejar errores
-void error(const char *msg);
+void error(char *msg);
 
 // Función para leer un vector desde un archivo
-int readVectorFromFile(char *filename, int **vec);
+int readVectorFromFile(char *filename, int **vector);
 
 // Función para escribir un vector en un archivo
-void writeVectorToFile(const char *fileName, int **vec, size_t size);
+void writeVectorToFile(char *fileName, int *vector, int size);
 
 // Función para imprimir un vector
-void printVector(int **vec, size_t size);
+void printVector(int *vector, int size);
 
 //Función para sumar los valores de un vector en un rango
-int sumVectorRange(int **vec, int startIndex, int endIndex)
+int sumVectorRange(int *vector, int startIndex, int endIndex);
 
-#endif // TONE_LIBS_UTILS_H
+#endif

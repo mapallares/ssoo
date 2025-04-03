@@ -27,29 +27,33 @@ int readVectorFromFile(char *filename, int **vector) {
     return c;  
 }
 
-void writeVectorToFile(const char *fileName, int **vector, size_t size) {
-    FILE *infile = fopen(fileName, "w");
-    if (!infile) { error("Error fopen\n"); }
-    
-    for (size_t i = 0; i < size; i++) {
-        fprintf(infile, "%d\n", (*vector)[i]);
+void writeVectorToFile(char *fileName, int *vector, int size) {
+    FILE *outfile = fopen(fileName, "w");
+    if (!outfile) {
+        error("Error fopen\n");
     }
-    
-    fclose(infile);
+
+    fprintf(outfile, "%d\n", size);
+
+    for (int i = 0; i < size; i++) {
+        fprintf(outfile, "%d\n", vector[i]);
+    }
+
+    fclose(outfile);
 }
 
-void printVector(int **vector, size_t size) {
+void printVector(int *vector, int size) {
     printf("Vector elements:\n");
-    for (size_t i = 0; i < size; i++) {
-        printf("%d ", (*vector)[i]);
+    for (int i = 0; i < size; i++) {
+        printf("%d ", vector[i]);
     }
     printf("\n");
 }
 
-int sumVectorRange(int **vector, int startIndex, int endIndex) {
+int sumVectorRange(int *vector, int startIndex, int endIndex) {
     int sum = 0;
-    for(int i = startIndex; i < endIndex; i++) {
-        sum += (*vector)[i];
+    for (int i = startIndex; i < endIndex; i++) {
+        sum += vector[i];
     }
     return sum;
 }

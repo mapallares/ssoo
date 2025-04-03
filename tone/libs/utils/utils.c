@@ -31,7 +31,7 @@ void freeMatrix(int** matrix, int rows) {
     free(matrix);
 }
 
-void readVectorFromFile(char *filename, int **vector) {
+int readVectorFromFile(char *filename, int **vector) {
     int c, numero, totalNumeros;
     FILE *infile;
     infile = fopen(filename, "r");
@@ -49,6 +49,8 @@ void readVectorFromFile(char *filename, int **vector) {
     }
 
     fclose(infile);
+
+    return c;
 }
 
 void writeVectorToFile(char *filename, int *vector, int size) {

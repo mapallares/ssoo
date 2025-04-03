@@ -24,7 +24,7 @@ void allocateMatrix(int*** matrix, int rows, int cols);
 void freeMatrix(int** matrix, int rows);
 
 // Función para leer un vector desde un archivo
-void readVectorFromFile(char *filename, int **vector);
+int readVectorFromFile(char *filename, int **vector);
 
 // Función para escribir un vector en un archivo
 void writeVectorToFile(char *fileName, int *vector, int size);

@@ -1,7 +1,7 @@
 #include "utils.h"
 
-void error(char *msg){
-    perror(msg);
+void error(char *message){
+    perror(message);
     exit(-1);
 }
 
@@ -20,7 +20,7 @@ void allocateMatrix(int*** matrix, int rows, int cols) {
     
     for (int i = 0; i < rows; i++) {
         (*matrix)[i] = (int*) calloc(cols, sizeof(int));
-        if (!(*matrix)[i]) { error("Error allocating memory (calloc) for matrix row %d.\n", i) }
+        if (!(*matrix)[i]) { error("Error allocating memory (calloc) for matrix row.\n") }
     }
 }
 
@@ -36,12 +36,12 @@ void readVectorFromFile(char *filename, int **vector) {
     FILE *infile;
     infile = fopen(filename, "r");
 
-    if(!infile) { error("Error fopen\n"); }
+    if(!infile) { error("Error opening file.\n"); }
 
-    fscanf(infile, "%d", &totalNumeros); 
+    fscanf(infile, "%d", &totalNumeros);
+
     *vector = (int *)calloc(totalNumeros, sizeof(int));
-
-    if(!*vector) { error("Error calloc"); }
+    if(!*vector) { error("Error allocating memory (calloc) for the vector."); }
 
     for(c = 0; c < totalNumeros; c++) {
         fscanf(infile, "%d", &numero);
@@ -51,11 +51,9 @@ void readVectorFromFile(char *filename, int **vector) {
     fclose(infile);
 }
 
-void writeVectorToFile(char *fileName, int *vector, int size) {
-    FILE *outfile = fopen(fileName, "w");
-    if (!outfile) {
-        error("Error fopen\n");
-    }
+void writeVectorToFile(char *filename, int *vector, int size) {
+    FILE *outfile = fopen(filename, "w");
+    if (!outfile) { error("Error opening file.\n"); }
 
     fprintf(outfile, "%d\n", size);
 
@@ -67,7 +65,7 @@ void writeVectorToFile(char *fileName, int *vector, int size) {
 }
 
 void printVector(int *vector, int size) {
-    printf("Vector elements:\n");
+    printf("Vector elements: \n");
     for (int i = 0; i < size; i++) {
         printf("%d ", vector[i]);
     }

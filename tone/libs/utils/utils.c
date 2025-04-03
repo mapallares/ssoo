@@ -20,7 +20,7 @@ void allocateMatrix(int*** matrix, int rows, int cols) {
     
     for (int i = 0; i < rows; i++) {
         (*matrix)[i] = (int*) calloc(cols, sizeof(int));
-        if (!(*matrix)[i]) { error("Error allocating memory (calloc) for matrix row.\n") }
+        if (!(*matrix)[i]) { error("Error allocating memory (calloc) for matrix row.\n"); }
     }
 }
 

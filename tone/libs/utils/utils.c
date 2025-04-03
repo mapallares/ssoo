@@ -76,7 +76,7 @@ void printVector(int *vector, int size) {
 
 int sumVectorElementsInRange(int *vector, int startIndex, int endIndex) {
     int sum = 0;
-    for (int i = startIndex; i < endIndex; i++) {
+    for (int i = startIndex; i <= endIndex; i++) {
         sum += vector[i];
     }
     return sum;

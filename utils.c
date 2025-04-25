@@ -5,6 +5,17 @@ void error(char *message){
     exit(-1);
 }
 
+void showProcessTree(){
+    char b[50]; 
+    sprintf(b,"pstree -lp %d", getpid());
+    system(b);
+}
+
+int KILL(pid_t pid, int signal) {
+    usleep(10000);
+    return kill(pid, signal);
+}
+
 void allocateVector(int** vector, int size) {
     *vector = (int*) calloc(size, sizeof(int));
     if(!*vector) { error("Error allocating memory (calloc) for the vector."); }
@@ -67,7 +78,7 @@ void writeVectorToFile(char *filename, int *vector, int size) {
 }
 
 void printVector(int *vector, int size) {
-    printf("Vector elements: \n");
+    //printf("Vector elements: \n");
     for (int i = 0; i < size; i++) {
         printf("%d ", vector[i]);
     }

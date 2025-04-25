@@ -7,9 +7,16 @@
 #include <sys/types.h>  // Para tipos de datos como pid_t.
 #include <sys/wait.h>   // Para la función wait.
 #include <unistd.h>     // Para la función fork y sleep.
+#include <signal.h>     // Para la comunicación con señales
 
 // Función para manejar errores
 void error(char *msg);
+
+// Función para mostrar el arbol de procesos
+void showProcessTree();
+
+// Función kill con usleep
+int KILL(pid_t pid, int signal);
 
 // Función para reservar memoria para un vector dinámico
 void allocateVector(int** vector, int size);
@@ -34,5 +41,6 @@ void printVector(int *vector, int size);
 
 //Función para sumar los valores de un vector en un rango
 int sumVectorElementsInRange(int *vector, int startIndex, int endIndex);
+
 
 #endif

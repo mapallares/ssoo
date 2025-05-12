@@ -380,4 +380,62 @@ void sumWindows(int** matrix, int rows, int cols, int windowHeight, int windowWi
     }
 }
 
+int readCharVectorFromFile(char *fileName, char **vector) {
+    int c, len;
+    char charter;
+    FILE *infile;
+    infile = fopen(fileName, "r");
+
+    if(!infile) { error("Error opening file.\n"); }
+
+    fscanf(infile, "%d", &len);
+
+    *vector = (char *)calloc(len, sizeof(char));
+    if(!*vector) { error("Error allocating memory (calloc) for the vector."); }
+
+    for(c = 0; c < len; c++) {
+        fscanf(infile, "%c", &charter);
+        (*vector)[c] = charter;
+    }
+
+    fclose(infile);
+
+    return c;
+}
+
+void writeCharVectorToFile(char *fileName, char *vector, int size) {
+    FILE *outfile = fopen(fileName, "w");
+    if (!outfile) { error("Error opening file.\n"); }
+
+    fprintf(outfile, "%d\n", size);
+
+    for (int i = 0; i < size; i++) {
+        fprintf(outfile, "%c\n", vector[i]);
+    }
+
+    fclose(outfile);
+}
+void printCharVector(char *vector, int size) {
+    for (int i = 0; i < size; i++) {
+        printf("%c ", vector[i]);
+    }
+    printf("\n");
+}
+
+unsigned int sizeOfMatrix(int rows, int cols, size_t sizeElement) {
+    size_t size;
+    size = rows * sizeof(void *);
+    size += (cols * rows * sizeElement);
+    return size;
+}
+
+void createIndex(void **matrix, int rows, int cols,  size_t sizeElement) {
+    int index;
+    size_t sizeRow = cols * sizeElement;
+    matrix[0] = matrix + rows;
+    for(index = 1; index < rows; index++) {
+        matrix[index] = (matrix[index - 1] + sizeRow);
+    }
+}
+
 #endif

@@ -206,6 +206,72 @@ void traverseSpiral(int** matrix, int rows, int cols) {
     }
 }
 
+int searchHorizontal(char **matrix, int rows, int cols, char *word) {
+    int len = strlen(word);
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j <= cols - len; j++) {
+            int k;
+            for (k = 0; k < len; k++)
+                if (matrix[i][j + k] != word[k]) break;
+            if (k == len) return 1;
+
+            for (k = 0; k < len; k++)
+                if (matrix[i][j + k] != word[len - 1 - k]) break;
+            if (k == len) return 1;
+        }
+    }
+    return 0;
+}
+
+int searchVertical(char **matrix, int rows, int cols, char *word) {
+    int len = strlen(word);
+    for (int j = 0; j < cols; j++) {
+        for (int i = 0; i <= rows - len; i++) {
+            int k;
+            for (k = 0; k < len; k++)
+                if (matrix[i + k][j] != word[k]) break;
+            if (k == len) return 1;
+
+            for (k = 0; k < len; k++)
+                if (matrix[i + k][j] != word[len - 1 - k]) break;
+            if (k == len) return 1;
+        }
+    }
+    return 0;
+}
+
+int searchDiagonal(char **matrix, int rows, int cols, char *word) {
+    int len = strlen(word);
+
+    for (int i = 0; i <= rows - len; i++) {
+        for (int j = 0; j <= cols - len; j++) {
+            int k;
+            for (k = 0; k < len; k++)
+                if (matrix[i + k][j + k] != word[k]) break;
+            if (k == len) return 1;
+
+            for (k = 0; k < len; k++)
+                if (matrix[i + k][j + k] != word[len - 1 - k]) break;
+            if (k == len) return 1;
+        }
+    }
+
+    for (int i = 0; i <= rows - len; i++) {
+        for (int j = len - 1; j < cols; j++) {
+            int k;
+            for (k = 0; k < len; k++)
+                if (matrix[i + k][j - k] != word[k]) break;
+            if (k == len) return 1;
+
+            for (k = 0; k < len; k++)
+                if (matrix[i + k][j - k] != word[len - 1 - k]) break;
+            if (k == len) return 1;
+        }
+    }
+
+    return 0;
+}
+
 void reverseString(char *str) {
     int start = 0;
     int end = strlen(str) - 1;
@@ -415,6 +481,7 @@ void writeCharVectorToFile(char *fileName, char *vector, int size) {
 
     fclose(outfile);
 }
+
 void printCharVector(char *vector, int size) {
     for (int i = 0; i < size; i++) {
         printf("%c ", vector[i]);
